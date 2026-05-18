@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza World Dhori Adda</title>
+<style>
+body{font-family:Arial;margin:0;background:#f5f5f5;}
+header{background:linear-gradient(90deg,#ff4d4d,#ff9900);color:white;padding:20px;text-align:center;}
+.container{padding:20px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;}
+.card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.card img{width:100%;height:160px;object-fit:cover;}
+.card-content{padding:10px;}
+button{background:#ff4d4d;color:white;border:none;padding:10px;width:100%;cursor:pointer;border-radius:5px;}
+button:hover{background:#e63e3e;}
+.cart{background:white;padding:15px;margin-top:20px;border-radius:10px;}
+footer{text-align:center;padding:15px;background:#222;color:white;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🍕 Pizza World Dhori Adda</h1>
+<p>Fresh Pizza & Fast Food Delivery</p>
+</header>
+
+<div class="container">
+
+<h2>Menu</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601924582971-4a6b8c6d1d6b">
+<div class="card-content">
+<h3>Chicken Pizza</h3>
+<p>Rs 1200</p>
+<button onclick="addToCart('Chicken Pizza',1200)">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1548365328-9f547f4b1f7f">
+<div class="card-content">
+<h3>Pepperoni Pizza</h3>
+<p>Rs 1500</p>
+<button onclick="addToCart('Pepperoni Pizza',1500)">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600628422019-6c4f6f3a8f2b">
+<div class="card-content">
+<h3>Veggie Pizza</h3>
+<p>Rs 1100</p>
+<button onclick="addToCart('Veggie Pizza',1100)">Add to Cart</button>
+</div>
+</div>
+
+</div>
+
+<div class="cart">
+<h2>Cart</h2>
+<div id="cart"></div>
+<p id="total"></p>
+<button onclick="checkout()">Order on WhatsApp</button>
+</div>
+
+</div>
+
+<footer>
+© Pizza World Dhori Adda | Dhori Adda Layyah
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(name, price){
+cart.push({name, price});
+renderCart();
+}
+
+function renderCart(){
+let html = '';
+let total = 0;
+cart.forEach(item=>{
+html += item.name + ' - Rs ' + item.price + '<br>';
+total += item.price;
+});
+document.getElementById('cart').innerHTML = html;
+document.getElementById('total').innerText = 'Total: Rs ' + total;
+}
+
+function checkout(){
+let number = "923229293622";
+let text = "Order:\n";
+cart.forEach(i=>{
+text += i.name + ' - Rs ' + i.price + "\n";
+});
+let url = "https://wa.me/" + number + "?text=" + encodeURIComponent(text);
+window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>
